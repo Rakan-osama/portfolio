@@ -3,7 +3,347 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/* Class-based dark mode (toggled on <html> by Alpine) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'PT Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-accent: #ff6b2b;
+    --color-accent-light: #ff8f5c;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Noise overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff6b2b;
+    border-radius: 99px;
+}
+
+/* Reveal on scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.in {
+    opacity: 1;
+    transform: none;
+}
+.d1 {
+    transition-delay: 0.08s;
+}
+.d2 {
+    transition-delay: 0.16s;
+}
+.d3 {
+    transition-delay: 0.24s;
+}
+.d4 {
+    transition-delay: 0.32s;
+}
+
+/* Nav underline animation */
+.nl {
+    position: relative;
+}
+.nl::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: currentColor;
+    transition: width 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nl:hover::after,
+.nl.on::after {
+    width: 100%;
+}
+.nl.on {
+    font-weight: 500;
+}
+
+/* Shimmer button */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.18);
+    transform: skewX(-20deg);
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.shimmer:hover::after {
+    left: 160%;
+}
+
+/* Photo/card frames */
+.pf {
+    overflow: hidden;
+    background: #d4d4d8;
+}
+.pf img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Card hover */
+.card-h {
+    transition:
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.18s;
+}
+.card-h:hover {
+    transform: translateY(-4px);
+}
+
+/* Skill tag — `translate` is kept separate from `transform` so hover lift
+   stays independent of entrance animations */
+.stag {
+    transition:
+        border-color 0.18s,
+        box-shadow 0.18s,
+        translate 0.18s;
+}
+.stag:hover {
+    border-color: #ff6b2b;
+    translate: 0 -2px;
+    box-shadow: 0 8px 20px -10px rgba(255, 107, 43, 0.6);
+}
+
+/* Staggered chip entrance (children of a .reveal container) */
+@keyframes chipIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.chip-pop {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+}
+.reveal.in .chip-pop {
+    animation: chipIn 0.45s cubic-bezier(0.2, 0.7, 0.3, 1.1) forwards;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+
+@keyframes floatY {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-24px);
+    }
+}
+
+@keyframes floatSoft {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(-36px, 26px) scale(1.15);
+    }
+    100% {
+        transform: translate(22px, -24px) scale(1.05);
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes glowPulse {
+    0%,
+    100% {
+        opacity: 0.55;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes dotRing {
+    0% {
+        transform: scale(0.6);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(2.1);
+        opacity: 0;
+    }
+}
+
+/* Gentle up & down levitation */
+.anim-float {
+    animation: floatY 5.5s ease-in-out infinite;
+    will-change: transform;
+}
+
+/* Softer float for floating chips / badges */
+.anim-float-soft {
+    animation: floatSoft 3.8s ease-in-out infinite;
+    will-change: transform;
+}
+
+/* Slow drift for background blobs */
+.anim-drift {
+    animation: drift 16s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+/* Animated glow halo */
+.anim-glow {
+    animation: glowPulse 5s ease-in-out infinite;
+}
+
+/* Photo frame with continuously shifting gradient border */
+.photo-ring {
+    display: block;
+    border-radius: 2rem;
+    padding: 5px;
+    background: linear-gradient(115deg, #ff6b2b, #ff8f5c, #22d3ee, #a855f7, #ff6b2b);
+    background-size: 300% 300%;
+    animation: gradientShift 9s ease infinite;
+    box-shadow: 0 24px 60px -24px rgba(255, 107, 43, 0.55);
+}
+.photo-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 1.75rem;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.photo-ring:hover img {
+    transform: scale(1.04);
+}
+
+/* Continuously shifting gradient background for project tiles */
+.anim-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 7s ease infinite;
+}
+
+/* Pulsing ring behind experience timeline dots */.dot-pulse::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(255, 107, 43, 0.55);
+    animation: dotRing 2.2s ease-out infinite;
+    pointer-events: none;
+}
+
+/* Card hover gets an accent shadow */
+.card-h:hover {
+    box-shadow: 0 20px 44px -20px rgba(0, 0, 0, 0.28);
+}
+
+/* Respect users who prefer reduced motion: heavy decoration is turned off,
+   but the signature floating photo/chips keep moving slower, since they carry
+   the visual identity of the page */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    .anim-drift,
+    .anim-glow,
+    .anim-gradient,
+    .dot-pulse::after {
+        animation: none;
+    }
+    .anim-float {
+        animation-duration: 9s;
+    }
+    .anim-float-soft {
+        animation-duration: 6.5s;
+    }
+    .chip-pop {
+        opacity: 1;
+        transform: none;
+    }
+    .reveal .chip-pop {
+        animation: none;
+    }
+    .card-h,
+    .card-h:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* Code block font */
+.code-font {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+[x-cloak] {
+    display: none !important;
 }
