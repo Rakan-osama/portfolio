@@ -1,0 +1,95 @@
+export const portfolio = {
+    profile: {
+        name: 'Rakan Osama',
+        role: 'Full-stack Developer',
+        location: 'Cairo, Egypt',
+        intro: 'PHP and Laravel full-stack developer building reliable business platforms, expressive digital experiences, and RESTful APIs.',
+        portrait: '/media/rakan-osama.webp',
+    },
+    contact: {
+        email: 'rakanosama.dev@gmail.com',
+        phone: '01010556064',
+        whatsapp: 'https://wa.me/201010556064',
+        linkedin: 'https://www.linkedin.com/in/rakan-osama',
+        github: 'https://github.com/Rakan-osama',
+    },
+    technologies: ['PHP', 'Laravel', 'MySQL', 'JavaScript', 'Vue.js', 'REST APIs', 'Bootstrap', 'Tailwind CSS', 'Git', 'OOP', 'SOLID', 'System Design'],
+    experience: [
+        {
+            company: 'Extreme Energy',
+            logo: '/media/logo-extreme-energy.webp',
+            role: 'Software Engineer',
+            location: 'Cairo',
+            period: 'August 2026 — Present',
+            description: 'Working on a SaaS platform, developing an ESG reporting module for stock exchange disclosures and implementing GRI standards within the system.',
+        },
+        {
+            company: 'Hossam X Studios',
+            logo: '/media/logo-hossam-x-studios.webp',
+            role: 'Backend Developer',
+            location: 'Cairo',
+            period: 'June 2025 — August 2026',
+            description: 'Built server-side logic, database structures, and business features across CRM, HRMS, and CMS dashboards using PHP and Laravel.',
+        },
+        {
+            company: 'New Solution',
+            logo: '/media/logo-new-solution.webp',
+            role: 'Frontend Developer',
+            location: 'Cairo',
+            period: 'April 2025 — June 2025',
+            description: 'Developed responsive Vue.js landing pages with a focus on interface implementation, styling, user experience, and cross-screen compatibility.',
+        },
+    ],
+    education: {
+        logo: '/media/logo-damietta-university.webp',
+        degree: 'B.Sc. in Communications & Electronics Engineering',
+        school: 'Damietta University',
+        period: 'September 2018 — June 2023',
+    },
+    projects: [
+        {
+            slug: 'esg-reporting-module', name: 'ESG Reporting Module', client: 'Extreme Energy', period: 'October 2026 — Present', status: 'In progress', liveUrl: null,
+            summary: 'A structured ESG reporting module supporting disclosure workflows and GRI-aligned reporting inside a SaaS platform.',
+            description: 'The module supports the collection, validation, processing, and reporting of ESG data. The current work focuses on translating complex reporting requirements into clear components and dependable workflows.',
+            services: ['Laravel', 'SaaS architecture', 'ESG workflows', 'GRI standards'], accent: 'ochre', initials: 'ESG',
+            images: ['esg-report-imag', 'esg-report-images-1', 'esg-report-images'],
+        },
+        {
+            slug: 'roaya-realestate', name: 'Roaya Real Estate', client: 'Real estate platform', period: 'July 2026 — August 2026', status: 'Live', liveUrl: 'https://roaya-realestate.com/',
+            summary: 'A full-stack real estate platform connecting listings, customer inquiries, CRM workflows, and down-payment management.',
+            description: 'I developed the frontend and backend of the platform, including CRM features and down-payment management. The product supports customer inquiries and the day-to-day workflows of a real estate business.',
+            services: ['Laravel', 'Frontend', 'CRM', 'Payment workflows'], accent: 'clay', initials: 'RY',
+            images: ['roaya-home-projects', 'roaya-home-destinations', 'roaya-dashboard', 'roaya-projects', 'roaya-cms-content'],
+        },
+        {
+            slug: 'hossam-x-studios', name: 'Hossam X Studios', client: 'Creative software house', period: 'May 2026 — July 2026', status: 'Live', liveUrl: 'https://hossam-x-studios.com/',
+            summary: 'A company showcase paired with internal CRM and HRMS modules for a growing creative software house.',
+            description: 'I developed the Laravel frontend and backend, building pages for the company’s services and previous work alongside CRM and HRMS modules that support internal operations.',
+            services: ['Laravel', 'Company website', 'CRM', 'HRMS'], accent: 'amber', initials: 'HX',
+            images: ['hossam-hero', 'hossam-public-website', 'hossam-saas', 'hossam-login'],
+        },
+        {
+            slug: 'green-harvest', name: 'Green Harvest', client: 'Agricultural exports', period: 'February 2026 — March 2026', status: 'Live', liveUrl: 'https://www.greenharvest-export.com/en',
+            summary: 'A bilingual export-focused website with a custom CMS, admin dashboard, and inquiry management.',
+            description: 'I developed the frontend and backend using Bootstrap and Laravel, then created a custom CMS and admin dashboard for managing website content and customer inquiries.',
+            services: ['Laravel', 'Bootstrap', 'Custom CMS', 'Admin dashboard'], accent: 'olive', initials: 'GH',
+            images: ['green-harvest-home', 'green-harvest-about', 'green-harvest-services', 'green-harvest-blogs'],
+        },
+        {
+            slug: 'biry-suits', name: 'Biry Suits', client: 'Fashion operations', period: 'January 2026 — May 2026', status: 'Live', liveUrl: 'https://birysuits.com/',
+            summary: 'A Laravel business management platform bringing operations, people, products, and content into one system.',
+            description: 'I developed a Laravel-based platform with ERP, CRM, HRMS, CMS, product management, and user-role features to support the company’s internal operations.',
+            services: ['Laravel', 'ERP & CRM', 'HRMS', 'Role management'], accent: 'sand', initials: 'BS',
+            images: ['biry-dashboard', 'biry-orders', 'biry-employees', 'biry-settings'],
+        },
+        {
+            slug: 'green-hills-club', name: 'Green Hills Club', client: 'Sports and social club', period: 'September 2025 — December 2025', status: 'Live', liveUrl: 'https://www.greenhills.club/',
+            summary: 'A club platform with a tailored admin dashboard and CRM for members, inquiries, events, and services.',
+            description: 'I developed the Laravel platform and its backend modules for managing members, customer inquiries, events, and club services through a focused administrative experience.',
+            services: ['Laravel', 'Admin dashboard', 'CRM', 'Events & members'], accent: 'copper', initials: 'GC',
+            images: ['green-hills-home', 'green-hills-dashboard', 'green-hills-contact', 'green-hills-members', 'green-hills-logo'],
+        },
+    ],
+};
+
+export const imagePath = (image, size = 1280) => `/media/${image}-${size}.webp`;

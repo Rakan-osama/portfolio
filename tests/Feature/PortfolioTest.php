@@ -7,6 +7,13 @@ use Tests\TestCase;
 
 class PortfolioTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutVite();
+    }
+
     public function test_homepage_renders_portfolio_content_and_contact_links(): void
     {
         $response = $this->get('/');
