@@ -15,13 +15,13 @@
     <body class="min-h-screen bg-cream text-ink antialiased" data-page="@yield('page', 'portfolio')">
         <a class="skip-link" href="#main-content">Skip to content</a>
         <div class="page-loader" data-loader aria-hidden="true">
-            <div class="page-loader__mark"><span>R</span><i></i><span>O</span></div>
+            <div class="page-loader__mark"><span>Rakan Osama</span></div>
             <p>Building thoughtful digital systems</p><div class="page-loader__line"><span></span></div>
         </div>
         <div class="pointer-glow" data-pointer-glow aria-hidden="true"></div>
 
         <header class="site-header" data-header>
-            <a class="brand" href="{{ route('portfolio.index') }}" aria-label="Rakan Osama homepage"><span>R</span><i></i><span>O</span></a>
+            <a class="brand" href="{{ route('portfolio.index') }}" aria-label="Rakan Osama homepage"><span>Rakan Osama</span></a>
             <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-navigation"><span></span><span></span><span class="sr-only">Toggle navigation</span></button>
             <nav id="site-navigation" class="site-nav" data-navigation aria-label="Primary navigation">
                 <a href="{{ route('portfolio.index') }}#work">Selected work</a>
