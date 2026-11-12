@@ -40,6 +40,7 @@ return [
     'experience' => [
         [
             'company' => 'Extreme Energy',
+            'logo' => 'img/logo_of_companies/extreme_energy.jpeg',
             'role' => 'Software Engineer',
             'location' => 'Cairo',
             'period' => 'August 2026 — Present',
@@ -47,6 +48,7 @@ return [
         ],
         [
             'company' => 'Hossam X Studios',
+            'logo' => 'img/logo_of_companies/logo.png',
             'role' => 'Backend Developer',
             'location' => 'Cairo',
             'period' => 'June 2025 — August 2026',
@@ -54,6 +56,7 @@ return [
         ],
         [
             'company' => 'New Solution',
+            'logo' => 'img/logo_of_companies/new_solution.jpeg',
             'role' => 'Frontend Developer',
             'location' => 'Cairo',
             'period' => 'April 2025 — June 2025',
@@ -61,6 +64,7 @@ return [
         ],
     ],
     'education' => [
+        'logo' => 'img/logo_of_companies/education_logo.jpeg',
         'degree' => 'B.Sc. in Communications & Electronics Engineering',
         'school' => 'Damietta University',
         'period' => 'September 2018 — June 2023',
@@ -78,6 +82,11 @@ return [
             'services' => ['Laravel', 'SaaS architecture', 'ESG workflows', 'GRI standards'],
             'accent' => 'ochre',
             'initials' => 'ESG',
+            'images' => [
+                'img/ESG_Report/imag.jpeg',
+                'img/ESG_Report/images (1).jpeg',
+                'img/ESG_Report/images.jpeg',
+            ],
         ],
         [
             'slug' => 'roaya-realestate',
@@ -91,6 +100,13 @@ return [
             'services' => ['Laravel', 'Frontend', 'CRM', 'Payment workflows'],
             'accent' => 'clay',
             'initials' => 'RY',
+            'images' => [
+                'img/Roaya_realestate/001-home-03-projects.webp',
+                'img/Roaya_realestate/001-home-02-destinations.webp',
+                'img/Roaya_realestate/001-dashboard.webp',
+                'img/Roaya_realestate/005-projects.webp',
+                'img/Roaya_realestate/008-cms-website-content.webp',
+            ],
         ],
         [
             'slug' => 'hossam-x-studios',
@@ -104,6 +120,12 @@ return [
             'services' => ['Laravel', 'Company website', 'CRM', 'HRMS'],
             'accent' => 'amber',
             'initials' => 'HX',
+            'images' => [
+                'img/hossam_x_studios/hero_secction.png',
+                'img/hossam_x_studios/public_website.png',
+                'img/hossam_x_studios/Saas_page.png',
+                'img/hossam_x_studios/login_page.png',
+            ],
         ],
         [
             'slug' => 'green-harvest',
@@ -117,6 +139,12 @@ return [
             'services' => ['Laravel', 'Bootstrap', 'Custom CMS', 'Admin dashboard'],
             'accent' => 'olive',
             'initials' => 'GH',
+            'images' => [
+                'img/green_harvest/001-home.webp',
+                'img/green_harvest/008-cms-about.webp',
+                'img/green_harvest/009-cms-services-page.webp',
+                'img/green_harvest/011-cms-blogs-page.webp',
+            ],
         ],
         [
             'slug' => 'biry-suits',
@@ -130,6 +158,12 @@ return [
             'services' => ['Laravel', 'ERP & CRM', 'HRMS', 'Role management'],
             'accent' => 'sand',
             'initials' => 'BS',
+            'images' => [
+                'img/biry_suits/01-admin-dashboard.webp',
+                'img/biry_suits/03-orders-create.webp',
+                'img/biry_suits/45-employees-index.webp',
+                'img/biry_suits/50-settings-index.webp',
+            ],
         ],
         [
             'slug' => 'green-hills-club',
@@ -143,6 +177,13 @@ return [
             'services' => ['Laravel', 'Admin dashboard', 'CRM', 'Events & members'],
             'accent' => 'copper',
             'initials' => 'GC',
+            'images' => [
+                'img/green_hills/001-home.webp',
+                'img/green_hills/001-admin-dashboard.webp',
+                'img/green_hills/004-contact.webp',
+                'img/green_hills/014-registered-members.webp',
+                'img/green_hills/images.png',
+            ],
         ],
     ],
 ];

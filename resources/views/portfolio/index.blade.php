@@ -71,7 +71,9 @@
                     <a class="project-card__visual" href="{{ route('projects.show', $project['slug']) }}" aria-label="View {{ $project['name'] }} case study">
                         <div class="project-browser">
                             <div class="project-browser__bar"><i></i><i></i><i></i><span>{{ $project['name'] }}</span></div>
-                            <div class="project-browser__canvas"><span class="project-initials">{{ $project['initials'] }}</span><div class="project-lines"><i></i><i></i><i></i></div><div class="project-orb"></div></div>
+                            <div class="project-browser__canvas">
+                                <img src="{{ asset($project['images'][0]) }}" alt="{{ $project['name'] }} project preview" width="1600" height="900" loading="lazy">
+                            </div>
                         </div>
                         <span class="project-view">View case study &nearr;</span>
                     </a>
@@ -97,10 +99,27 @@
 
     <div class="section-transition section-transition--cool" aria-hidden="true"><span></span><i></i></div>
 
+    <section class="gallery section-pad" aria-labelledby="gallery-title">
+        <div class="section-shell gallery-heading reveal" data-reveal>
+            <span class="section-index">02 / Work in motion</span><h2 id="gallery-title">A growing archive<br>of <em>digital work.</em></h2>
+            <p>A moving reel of interfaces from production websites, dashboards, and business systems.</p>
+        </div>
+        <div class="gallery-marquee" aria-label="Project previews"><div class="gallery-track">
+            @foreach (array_merge($portfolio['projects'], $portfolio['projects']) as $index => $project)
+                <a class="gallery-tile gallery-tile--{{ $project['accent'] }}" href="{{ route('projects.show', $project['slug']) }}" @if ($index >= count($portfolio['projects'])) aria-hidden="true" tabindex="-1" @endif>
+                    <img src="{{ asset($project['images'][0]) }}" alt="" width="1600" height="900" loading="lazy">
+                    <span class="gallery-tile__index">{{ str_pad(($index % count($portfolio['projects'])) + 1, 2, '0', STR_PAD_LEFT) }}</span><span>{{ $project['name'] }}</span>
+                </a>
+            @endforeach
+        </div></div>
+    </section>
+
+    <div class="section-transition section-transition--slate" aria-hidden="true"><span></span><i></i></div>
+
     <section class="experience section-pad" id="experience">
         <div class="section-shell">
             <div class="section-heading section-heading--row reveal" data-reveal>
-                <div><span class="section-index">02 / Experience</span><h2>Where craft met<br><em>real work.</em></h2></div>
+                <div><span class="section-index">03 / Experience</span><h2>Where craft met<br><em>real work.</em></h2></div>
                 <p>From responsive interfaces to complex SaaS modules, each role sharpened a different part of my full-stack practice.</p>
             </div>
             <div class="timeline" aria-label="Career history from earliest role to present">
@@ -108,6 +127,7 @@
                     <article class="timeline-item reveal" data-reveal>
                         <div class="timeline-card__top"><span class="timeline-number">0{{ $index + 1 }}</span><time>{{ $experience['period'] }}</time></div>
                         <div class="timeline-role">
+                            <div class="company-logo"><img src="{{ asset($experience['logo']) }}" alt="{{ $experience['company'] }} logo" width="96" height="96" loading="lazy"></div>
                             @if (str_contains($experience['period'], 'Present'))
                                 <span class="present-tag"><i></i>Present workplace</span>
                             @endif
@@ -118,25 +138,9 @@
                 @endforeach
             </div>
             <div class="education-card reveal" data-reveal>
-                <span>Education</span><div><h3>{{ $portfolio['education']['degree'] }}</h3><p>{{ $portfolio['education']['school'] }}</p></div><time>{{ $portfolio['education']['period'] }}</time>
+                <div class="education-logo"><img src="{{ asset($portfolio['education']['logo']) }}" alt="{{ $portfolio['education']['school'] }} logo" width="96" height="96" loading="lazy"></div><div><span>Education</span><h3>{{ $portfolio['education']['degree'] }}</h3><p>{{ $portfolio['education']['school'] }}</p></div><time>{{ $portfolio['education']['period'] }}</time>
             </div>
         </div>
-    </section>
-
-    <div class="section-transition section-transition--slate" aria-hidden="true"><span></span><i></i></div>
-
-    <section class="gallery section-pad" aria-labelledby="gallery-title">
-        <div class="section-shell gallery-heading reveal" data-reveal>
-            <span class="section-index">03 / Work in motion</span><h2 id="gallery-title">A growing archive<br>of <em>digital work.</em></h2>
-            <p>Project imagery will live here &mdash; an always-moving visual reel built to expand with every new launch.</p>
-        </div>
-        <div class="gallery-marquee" aria-label="Project image placeholders"><div class="gallery-track">
-            @foreach (array_merge($portfolio['projects'], $portfolio['projects']) as $index => $project)
-                <a class="gallery-tile gallery-tile--{{ $project['accent'] }}" href="{{ route('projects.show', $project['slug']) }}" @if ($index >= count($portfolio['projects'])) aria-hidden="true" tabindex="-1" @endif>
-                    <span class="gallery-tile__index">{{ str_pad(($index % count($portfolio['projects'])) + 1, 2, '0', STR_PAD_LEFT) }}</span><strong>{{ $project['initials'] }}</strong><span>{{ $project['name'] }}</span>
-                </a>
-            @endforeach
-        </div></div>
     </section>
 
     <div class="section-transition" aria-hidden="true"><span></span><i></i></div>

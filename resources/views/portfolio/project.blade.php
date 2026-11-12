@@ -31,12 +31,10 @@
             <div class="project-browser project-browser--large">
                 <div class="project-browser__bar"><i></i><i></i><i></i><span>{{ $project['name'] }}</span></div>
                 <div class="project-browser__canvas">
-                    <span class="project-initials">{{ $project['initials'] }}</span>
-                    <div class="project-lines"><i></i><i></i><i></i></div>
-                    <div class="project-orb"></div>
+                    <img src="{{ asset($project['images'][0]) }}" alt="{{ $project['name'] }} interface" width="1600" height="900">
                 </div>
             </div>
-            <p>Project screenshots are ready to be placed here.</p>
+            <p>Production interface</p>
         </div>
     </section>
 
@@ -55,19 +53,12 @@
         </div>
     </section>
 
-    <section class="project-gallery-placeholder section-shell">
-        <div class="project-placeholder project-placeholder--wide reveal" data-reveal>
-            <span>{{ $project['initials'] }}</span>
-            <p>Desktop experience</p>
-        </div>
-        <div class="project-placeholder reveal" data-reveal>
-            <span>{{ substr($project['initials'], 0, 1) }}</span>
-            <p>Responsive detail</p>
-        </div>
-        <div class="project-placeholder reveal" data-reveal>
-            <span>{{ substr($project['initials'], -1) }}</span>
-            <p>System interface</p>
-        </div>
+    <section class="project-gallery section-shell" aria-label="{{ $project['name'] }} screenshots">
+        @foreach (array_slice($project['images'], 1) as $imageIndex => $image)
+            <figure class="project-gallery__item {{ $imageIndex === 0 ? 'project-gallery__item--wide' : '' }} reveal" data-reveal>
+                <img src="{{ asset($image) }}" alt="{{ $project['name'] }} interface screenshot {{ $imageIndex + 2 }}" width="1600" height="900" loading="lazy">
+            </figure>
+        @endforeach
     </section>
 
     <section class="next-project section-pad">
