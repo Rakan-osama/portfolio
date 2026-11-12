@@ -17,15 +17,15 @@ const socialLinks = () => `
         <a href="${portfolio.contact.github}" target="_blank" rel="noreferrer" aria-label="Rakan Osama on GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-2.8 17.5c.5.1.7-.2.7-.5v-2c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.3-2.3-.3-4.7-1.1-4.7-5a3.9 3.9 0 0 1 1-2.7 3.7 3.7 0 0 1 .1-2.7s.8-.3 2.8 1a9.5 9.5 0 0 1 5.1 0c2-1.3 2.8-1 2.8-1a3.7 3.7 0 0 1 .1 2.7 3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.7 5 .4.3.7 1 .7 1.9V20c0 .3.2.6.7.5A9 9 0 0 0 12 3Z" /></svg></a>
     </div>`;
 
-const header = () => `
+const header = (project = null, isProjectPage = false) => `
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="page-loader" data-loader aria-hidden="true"><div class="page-loader__mark"><span>R</span><i></i><span>O</span></div><p>Building thoughtful digital systems</p><div class="page-loader__line"><span></span></div></div>
     <div class="pointer-glow" data-pointer-glow aria-hidden="true"></div>
     <header class="site-header" data-header>
         <a class="brand" href="/" aria-label="Rakan Osama homepage"><span>R</span><i></i><span>O</span></a>
         <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-navigation"><span></span><span></span><span class="sr-only">Toggle navigation</span></button>
-        <nav id="site-navigation" class="site-nav" data-navigation aria-label="Primary navigation"><a href="/#work">Selected work</a><a href="/#experience">Experience</a><a href="#contact">Contact</a></nav>
-        <a class="header-cta" href="mailto:${portfolio.contact.email}">Let&rsquo;s talk <span>&nearr;</span></a>
+        <nav id="site-navigation" class="site-nav" data-navigation aria-label="Primary navigation">${isProjectPage ? '<a href="/">Home</a>' : ''}<a href="/#work">Selected work</a><a href="/#experience">Experience</a><a href="#contact">Contact</a></nav>
+        ${project?.liveUrl ? `<a class="header-cta" href="${project.liveUrl}" target="_blank" rel="noreferrer">Visit live site <span>&nearr;</span></a>` : `<a class="header-cta" href="mailto:${portfolio.contact.email}">Let&rsquo;s talk <span>&nearr;</span></a>`}
     </header>`;
 
 const footer = () => `
@@ -64,7 +64,7 @@ const projectPage = (project) => {
     const projectIndex = portfolio.projects.indexOf(project);
     const nextProject = portfolio.projects[(projectIndex + 1) % portfolio.projects.length];
 
-    return `<section class="project-hero section-shell"><a class="project-back" href="/#work">&larr; Back to selected work</a><div class="project-hero__grid"><div><span class="project-hero__eyebrow">${project.client} &middot; ${project.status}</span><h1>${project.name}</h1><p>${project.summary}</p><div class="project-hero__actions">${project.liveUrl ? `<a class="button button--primary" href="${project.liveUrl}" target="_blank" rel="noreferrer">Visit live site <span>&nearr;</span></a>` : '<span class="project-progress"><i></i> Product currently in progress</span>'}</div></div><div class="project-hero__meta"><div><span>Timeline</span><strong>${project.period}</strong></div><div><span>My contribution</span><strong>${project.services.join(' &middot; ')}</strong></div></div></div></section>
+    return `<section class="project-hero section-shell"><a class="project-back" href="/#work">&larr; Back to selected work</a><div class="project-hero__grid"><div><span class="project-hero__eyebrow">${project.client} &middot; ${project.status}</span><h1>${project.name}</h1><p>${project.summary}</p><div class="project-hero__actions">${project.liveUrl ? `<a class="button button--contact" href="${project.liveUrl}" target="_blank" rel="noreferrer">Open live site <span>&nearr;</span></a>` : '<span class="project-progress"><i></i> Product currently in progress</span>'}</div></div><div class="project-hero__meta"><div><span>Timeline</span><strong>${project.period}</strong></div><div><span>My contribution</span><strong>${project.services.join(' &middot; ')}</strong></div></div></div></section>
         <section class="project-showcase project-card--${project.accent}"><div class="project-showcase__frame reveal" data-reveal><div class="project-browser project-browser--large"><div class="project-browser__bar"><i></i><i></i><i></i><span>${project.name}</span></div><div class="project-browser__canvas">${image(project.images[0], `${project.name} interface`, { eager: true, sizes: '90vw' })}</div></div><p>Production interface</p></div></section>
         <section class="project-overview section-shell section-pad"><div class="project-overview__heading reveal" data-reveal><span class="section-index">Project overview</span><h2>From requirements<br>to a working <em>system.</em></h2></div><div class="project-overview__body reveal" data-reveal><p>${project.description}</p><div class="project-services">${project.services.map((service, index) => `<span><i>${String(index + 1).padStart(2, '0')}</i>${service}</span>`).join('')}</div></div></section>
         <section class="project-gallery section-shell" aria-label="${project.name} screenshots">${project.images.slice(1).map((projectImage, index) => `<figure class="project-gallery__item ${index === 0 ? 'project-gallery__item--wide' : ''} reveal" data-reveal>${image(projectImage, `${project.name} interface screenshot ${index + 2}`, { sizes: index === 0 ? '90vw' : '(max-width: 820px) 90vw, 45vw' })}</figure>`).join('')}</section>
@@ -77,6 +77,6 @@ const isProjectPath = path.startsWith('/projects/');
 
 document.body.dataset.page = selectedProject ? 'project' : 'portfolio';
 document.title = selectedProject ? `${selectedProject.name} — Rakan Osama` : 'Rakan Osama — Full-stack Developer';
-document.querySelector('#app').innerHTML = `${header()}<main id="main-content">${selectedProject ? projectPage(selectedProject) : isProjectPath ? '<section class="project-hero section-shell"><h1>Project not found</h1><a class="button button--primary" href="/">Return home</a></section>' : homepage()}</main>${footer()}`;
+document.querySelector('#app').innerHTML = `${header(selectedProject, isProjectPath)}<main id="main-content">${selectedProject ? projectPage(selectedProject) : isProjectPath ? '<section class="project-hero section-shell"><h1>Project not found</h1><a class="button button--primary" href="/">Return home</a></section>' : homepage()}</main>${footer()}`;
 
 await import('./app.js');

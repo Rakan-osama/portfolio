@@ -13,7 +13,7 @@
                 <p>{{ $project['summary'] }}</p>
                 <div class="project-hero__actions">
                     @if ($project['live_url'])
-                        <a class="button button--primary" href="{{ $project['live_url'] }}" target="_blank" rel="noreferrer">Visit live site <span>↗</span></a>
+                        <a class="button button--contact" href="{{ $project['live_url'] }}" target="_blank" rel="noreferrer">Open live site <span>↗</span></a>
                     @else
                         <span class="project-progress"><i></i> Product currently in progress</span>
                     @endif
